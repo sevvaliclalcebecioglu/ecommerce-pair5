@@ -1,4 +1,4 @@
-package com.tobeto.ecommercepair5.services.dtos.responses;
+package com.tobeto.ecommercepair5.services.dtos.responses.products;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -12,6 +12,8 @@ import lombok.Setter;
 @NoArgsConstructor
 public class GetProductResponse {
     private int id;
+
+    private String categoryName;
 
     private String name;
 

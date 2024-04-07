@@ -1,4 +1,4 @@
-package com.tobeto.ecommercepair5.services.dtos.responses;
+package com.tobeto.ecommercepair5.services.dtos.responses.roles;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,17 +9,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AddProductResponse {
+public class ListRoleResponse {
     private int id;
 
-    private int categoryName;
-
     private String name;
-
-    private String description;
-
-    private int stock;
-
-    private int unitPrice;
-
 }

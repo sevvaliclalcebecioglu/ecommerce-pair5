@@ -1,6 +1,5 @@
-package com.tobeto.ecommercepair5.services.dtos.requests;
+package com.tobeto.ecommercepair5.services.dtos.responses.products;
 
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,11 +9,10 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UpdateProductRequest {
-    @NotNull
+public class UpdateProductResponse {
     private int id;
 
-    private int categoryName;
+    private String categoryName;
 
     private String name;
 
@@ -23,5 +21,4 @@ public class UpdateProductRequest {
     private int stock;
 
     private int unitPrice;
-
 }

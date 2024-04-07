@@ -1,9 +1,9 @@
 package com.tobeto.ecommercepair5.controllers;
 
 import com.tobeto.ecommercepair5.services.abstracts.ProductService;
-import com.tobeto.ecommercepair5.services.dtos.requests.AddProductRequest;
-import com.tobeto.ecommercepair5.services.dtos.requests.UpdateProductRequest;
-import com.tobeto.ecommercepair5.services.dtos.responses.*;
+import com.tobeto.ecommercepair5.services.dtos.requests.products.AddProductRequest;
+import com.tobeto.ecommercepair5.services.dtos.requests.products.UpdateProductRequest;
+import com.tobeto.ecommercepair5.services.dtos.responses.products.*;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
