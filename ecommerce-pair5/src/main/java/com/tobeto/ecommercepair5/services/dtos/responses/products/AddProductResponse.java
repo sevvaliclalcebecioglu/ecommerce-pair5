@@ -12,7 +12,7 @@ import lombok.Setter;
 public class AddProductResponse {
     private int id;
 
-    private int categoryName;
+    private String categoryName;
 
     private String name;
 

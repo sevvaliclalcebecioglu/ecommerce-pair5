@@ -15,7 +15,7 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-04-07T15:05:10+0300",
+    date = "2024-04-07T18:50:05+0300",
     comments = "version: 1.6.0.Beta1, compiler: javac, environment: Java 20.0.2 (Oracle Corporation)"
 )
 public class ProductMapperImpl implements ProductMapper {
@@ -53,9 +53,7 @@ public class ProductMapperImpl implements ProductMapper {
             addProductResponse.setUnitPrice( product.getUnitPrice() );
         }
         if ( category != null ) {
-            if ( category.getName() != null ) {
-                addProductResponse.setCategoryName( Integer.parseInt( category.getName() ) );
-            }
+            addProductResponse.setCategoryName( category.getName() );
         }
 
         return addProductResponse;
