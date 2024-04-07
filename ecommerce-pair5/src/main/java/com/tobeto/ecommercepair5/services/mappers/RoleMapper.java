@@ -3,11 +3,7 @@ package com.tobeto.ecommercepair5.services.mappers;
 import com.tobeto.ecommercepair5.entities.Role;
 import com.tobeto.ecommercepair5.services.dtos.requests.roles.AddRoleRequest;
 import com.tobeto.ecommercepair5.services.dtos.requests.roles.UpdateRoleRequest;
-import com.tobeto.ecommercepair5.services.dtos.responses.orders.UpdateOrderResponse;
-import com.tobeto.ecommercepair5.services.dtos.responses.roles.AddRoleResponse;
-import com.tobeto.ecommercepair5.services.dtos.responses.roles.DeleteRoleResponse;
-import com.tobeto.ecommercepair5.services.dtos.responses.roles.GetRoleResponse;
-import com.tobeto.ecommercepair5.services.dtos.responses.roles.ListRoleResponse;
+import com.tobeto.ecommercepair5.services.dtos.responses.roles.*;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
@@ -28,7 +24,7 @@ public interface RoleMapper {
 
     Role roleFromUpdateRequest(UpdateRoleRequest request);
 
-    UpdateOrderResponse updateResponseFromRole(Role role);
+    UpdateRoleResponse updateResponseFromRole(Role role);
 
     @Mapping(target = "id", source = "id")
     DeleteRoleResponse deleteResponseFromId(Role role);

@@ -3,18 +3,18 @@ package com.tobeto.ecommercepair5.services.mappers;
 import com.tobeto.ecommercepair5.entities.Role;
 import com.tobeto.ecommercepair5.services.dtos.requests.roles.AddRoleRequest;
 import com.tobeto.ecommercepair5.services.dtos.requests.roles.UpdateRoleRequest;
-import com.tobeto.ecommercepair5.services.dtos.responses.orders.UpdateOrderResponse;
 import com.tobeto.ecommercepair5.services.dtos.responses.roles.AddRoleResponse;
 import com.tobeto.ecommercepair5.services.dtos.responses.roles.DeleteRoleResponse;
 import com.tobeto.ecommercepair5.services.dtos.responses.roles.GetRoleResponse;
 import com.tobeto.ecommercepair5.services.dtos.responses.roles.ListRoleResponse;
+import com.tobeto.ecommercepair5.services.dtos.responses.roles.UpdateRoleResponse;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-04-07T19:27:18+0300",
+    date = "2024-04-07T21:09:10+0300",
     comments = "version: 1.6.0.Beta1, compiler: javac, environment: Java 20.0.2 (Oracle Corporation)"
 )
 public class RoleMapperImpl implements RoleMapper {
@@ -89,16 +89,17 @@ public class RoleMapperImpl implements RoleMapper {
     }
 
     @Override
-    public UpdateOrderResponse updateResponseFromRole(Role role) {
+    public UpdateRoleResponse updateResponseFromRole(Role role) {
         if ( role == null ) {
             return null;
         }
 
-        UpdateOrderResponse updateOrderResponse = new UpdateOrderResponse();
+        UpdateRoleResponse updateRoleResponse = new UpdateRoleResponse();
 
-        updateOrderResponse.setId( role.getId() );
+        updateRoleResponse.setId( role.getId() );
+        updateRoleResponse.setName( role.getName() );
 
-        return updateOrderResponse;
+        return updateRoleResponse;
     }
 
     @Override
