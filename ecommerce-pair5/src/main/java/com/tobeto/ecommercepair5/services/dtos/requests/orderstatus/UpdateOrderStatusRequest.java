@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UpdateOrderRequest {
+public class UpdateOrderStatusRequest {
     private int id;
     private OrderStatus status;
 }
