@@ -2,20 +2,20 @@ package com.tobeto.ecommercepair5.services.mappers;
 
 import com.tobeto.ecommercepair5.entities.Category;
 import com.tobeto.ecommercepair5.entities.Product;
-import com.tobeto.ecommercepair5.services.dtos.requests.products.AddProductRequest;
-import com.tobeto.ecommercepair5.services.dtos.requests.products.UpdateProductRequest;
-import com.tobeto.ecommercepair5.services.dtos.responses.products.AddProductResponse;
-import com.tobeto.ecommercepair5.services.dtos.responses.products.DeleteProductResponse;
-import com.tobeto.ecommercepair5.services.dtos.responses.products.GetProductResponse;
-import com.tobeto.ecommercepair5.services.dtos.responses.products.ListProductResponse;
-import com.tobeto.ecommercepair5.services.dtos.responses.products.UpdateProductResponse;
+import com.tobeto.ecommercepair5.services.dtos.requests.product.AddProductRequest;
+import com.tobeto.ecommercepair5.services.dtos.requests.product.UpdateProductRequest;
+import com.tobeto.ecommercepair5.services.dtos.responses.product.AddProductResponse;
+import com.tobeto.ecommercepair5.services.dtos.responses.product.DeleteProductResponse;
+import com.tobeto.ecommercepair5.services.dtos.responses.product.GetProductResponse;
+import com.tobeto.ecommercepair5.services.dtos.responses.product.ListProductResponse;
+import com.tobeto.ecommercepair5.services.dtos.responses.product.UpdateProductResponse;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-04-07T18:50:05+0300",
+    date = "2024-04-08T23:53:36+0300",
     comments = "version: 1.6.0.Beta1, compiler: javac, environment: Java 20.0.2 (Oracle Corporation)"
 )
 public class ProductMapperImpl implements ProductMapper {
@@ -32,7 +32,8 @@ public class ProductMapperImpl implements ProductMapper {
         product.setName( request.getName() );
         product.setDescription( request.getDescription() );
         product.setStock( request.getStock() );
-        product.setUnitPrice( request.getUnitPrice() );
+        product.setUnitPrice( (int) request.getUnitPrice() );
+        product.setAddedDate( request.getAddedDate() );
 
         return product;
     }
@@ -51,6 +52,7 @@ public class ProductMapperImpl implements ProductMapper {
             addProductResponse.setDescription( product.getDescription() );
             addProductResponse.setStock( product.getStock() );
             addProductResponse.setUnitPrice( product.getUnitPrice() );
+            addProductResponse.setAddedDate( product.getAddedDate() );
         }
         if ( category != null ) {
             addProductResponse.setCategoryName( category.getName() );
@@ -72,7 +74,8 @@ public class ProductMapperImpl implements ProductMapper {
         product.setName( request.getName() );
         product.setDescription( request.getDescription() );
         product.setStock( request.getStock() );
-        product.setUnitPrice( request.getUnitPrice() );
+        product.setUnitPrice( (int) request.getUnitPrice() );
+        product.setAddedDate( request.getAddedDate() );
 
         return product;
     }
@@ -91,6 +94,7 @@ public class ProductMapperImpl implements ProductMapper {
             updateProductResponse.setDescription( product.getDescription() );
             updateProductResponse.setStock( product.getStock() );
             updateProductResponse.setUnitPrice( product.getUnitPrice() );
+            updateProductResponse.setAddedDate( product.getAddedDate() );
         }
         if ( category != null ) {
             updateProductResponse.setCategoryName( category.getName() );
@@ -112,6 +116,7 @@ public class ProductMapperImpl implements ProductMapper {
         deleteProductResponse.setDescription( product.getDescription() );
         deleteProductResponse.setStock( product.getStock() );
         deleteProductResponse.setUnitPrice( product.getUnitPrice() );
+        deleteProductResponse.setAddedDate( product.getAddedDate() );
 
         return deleteProductResponse;
     }
@@ -144,6 +149,7 @@ public class ProductMapperImpl implements ProductMapper {
             getProductResponse.setDescription( product.getDescription() );
             getProductResponse.setStock( product.getStock() );
             getProductResponse.setUnitPrice( product.getUnitPrice() );
+            getProductResponse.setAddedDate( product.getAddedDate() );
         }
         if ( category != null ) {
             getProductResponse.setCategoryName( category.getName() );
@@ -188,6 +194,7 @@ public class ProductMapperImpl implements ProductMapper {
         listProductResponse.setDescription( product.getDescription() );
         listProductResponse.setStock( product.getStock() );
         listProductResponse.setUnitPrice( product.getUnitPrice() );
+        listProductResponse.setAddedDate( product.getAddedDate() );
 
         return listProductResponse;
     }

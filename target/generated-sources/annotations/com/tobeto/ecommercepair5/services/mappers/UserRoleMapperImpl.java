@@ -1,20 +1,22 @@
 package com.tobeto.ecommercepair5.services.mappers;
 
+import com.tobeto.ecommercepair5.entities.Role;
+import com.tobeto.ecommercepair5.entities.User;
 import com.tobeto.ecommercepair5.entities.UserRole;
-import com.tobeto.ecommercepair5.services.dtos.requests.userroles.AddUserRoleRequest;
-import com.tobeto.ecommercepair5.services.dtos.requests.userroles.UpdateUserRoleRequest;
-import com.tobeto.ecommercepair5.services.dtos.responses.userroles.AddUserRoleResponse;
-import com.tobeto.ecommercepair5.services.dtos.responses.userroles.DeleteUserRoleResponse;
-import com.tobeto.ecommercepair5.services.dtos.responses.userroles.GetUserRoleResponse;
-import com.tobeto.ecommercepair5.services.dtos.responses.userroles.ListUserRoleResponse;
-import com.tobeto.ecommercepair5.services.dtos.responses.userroles.UpdateUserRoleResponse;
+import com.tobeto.ecommercepair5.services.dtos.requests.userrole.AddUserRoleRequest;
+import com.tobeto.ecommercepair5.services.dtos.requests.userrole.UpdateUserRoleRequest;
+import com.tobeto.ecommercepair5.services.dtos.responses.userrole.AddUserRoleResponse;
+import com.tobeto.ecommercepair5.services.dtos.responses.userrole.DeleteUserRoleResponse;
+import com.tobeto.ecommercepair5.services.dtos.responses.userrole.GetUserRoleResponse;
+import com.tobeto.ecommercepair5.services.dtos.responses.userrole.ListUserRoleResponse;
+import com.tobeto.ecommercepair5.services.dtos.responses.userrole.UpdateUserRoleResponse;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-04-07T21:53:16+0300",
+    date = "2024-04-08T23:53:36+0300",
     comments = "version: 1.6.0.Beta1, compiler: javac, environment: Java 20.0.2 (Oracle Corporation)"
 )
 public class UserRoleMapperImpl implements UserRoleMapper {
@@ -27,37 +29,84 @@ public class UserRoleMapperImpl implements UserRoleMapper {
 
         UserRole userRole = new UserRole();
 
+        userRole.setRole( addUserRoleRequestToRole( request ) );
+        userRole.setUser( addUserRoleRequestToUser( request ) );
+
         return userRole;
     }
 
     @Override
-    public AddUserRoleResponse addResponseFromUserRole(UserRole userRole) {
-        if ( userRole == null ) {
+    public AddUserRoleResponse addResponseFromUserRole(UserRole userRole, Role role, User user) {
+        if ( userRole == null && role == null && user == null ) {
             return null;
         }
 
         AddUserRoleResponse addUserRoleResponse = new AddUserRoleResponse();
 
-        addUserRoleResponse.setId( userRole.getId() );
+        if ( userRole != null ) {
+            addUserRoleResponse.setId( userRole.getId() );
+        }
+        if ( role != null ) {
+            addUserRoleResponse.setRoleName( role.getName() );
+        }
+        if ( user != null ) {
+            addUserRoleResponse.setUserName( user.getFirstName() );
+        }
 
         return addUserRoleResponse;
     }
 
     @Override
-    public GetUserRoleResponse getUserRoleResponse(UserRole userRole) {
+    public UserRole userRoleFromUpdateRequest(UpdateUserRoleRequest request) {
+        if ( request == null ) {
+            return null;
+        }
+
+        UserRole userRole = new UserRole();
+
+        userRole.setRole( updateUserRoleRequestToRole( request ) );
+        userRole.setUser( updateUserRoleRequestToUser( request ) );
+        userRole.setId( request.getId() );
+
+        return userRole;
+    }
+
+    @Override
+    public UpdateUserRoleResponse updateResponseFromUserRole(UserRole userRole, Role role, User user) {
+        if ( userRole == null && role == null && user == null ) {
+            return null;
+        }
+
+        UpdateUserRoleResponse updateUserRoleResponse = new UpdateUserRoleResponse();
+
+        if ( userRole != null ) {
+            updateUserRoleResponse.setId( userRole.getId() );
+        }
+        if ( role != null ) {
+            updateUserRoleResponse.setRoleName( role.getName() );
+        }
+        if ( user != null ) {
+            updateUserRoleResponse.setUserName( user.getFirstName() );
+        }
+
+        return updateUserRoleResponse;
+    }
+
+    @Override
+    public DeleteUserRoleResponse deleteResponseFromUserRole(UserRole userRole) {
         if ( userRole == null ) {
             return null;
         }
 
-        GetUserRoleResponse getUserRoleResponse = new GetUserRoleResponse();
+        DeleteUserRoleResponse deleteUserRoleResponse = new DeleteUserRoleResponse();
 
-        getUserRoleResponse.setId( userRole.getId() );
+        deleteUserRoleResponse.setId( userRole.getId() );
 
-        return getUserRoleResponse;
+        return deleteUserRoleResponse;
     }
 
     @Override
-    public List<ListUserRoleResponse> listUserRoleResponse(List<UserRole> userRoles) {
+    public List<ListUserRoleResponse> listResponseFromUserRole(List<UserRole> userRoles) {
         if ( userRoles == null ) {
             return null;
         }
@@ -71,42 +120,72 @@ public class UserRoleMapperImpl implements UserRoleMapper {
     }
 
     @Override
-    public UserRole userRoleFromUpdateRequest(UpdateUserRoleRequest request) {
-        if ( request == null ) {
+    public GetUserRoleResponse getUserRoleResponse(UserRole userRole, Role role, User user) {
+        if ( userRole == null && role == null && user == null ) {
             return null;
         }
 
-        UserRole userRole = new UserRole();
+        GetUserRoleResponse getUserRoleResponse = new GetUserRoleResponse();
 
-        userRole.setId( request.getId() );
+        if ( userRole != null ) {
+            getUserRoleResponse.setId( userRole.getId() );
+        }
+        if ( role != null ) {
+            getUserRoleResponse.setRoleName( role.getName() );
+        }
+        if ( user != null ) {
+            getUserRoleResponse.setUserName( user.getFirstName() );
+        }
 
-        return userRole;
+        return getUserRoleResponse;
     }
 
-    @Override
-    public UpdateUserRoleResponse updateResponseFromUserRole(UserRole userRole) {
-        if ( userRole == null ) {
+    protected Role addUserRoleRequestToRole(AddUserRoleRequest addUserRoleRequest) {
+        if ( addUserRoleRequest == null ) {
             return null;
         }
 
-        UpdateUserRoleResponse updateUserRoleResponse = new UpdateUserRoleResponse();
+        Role role = new Role();
 
-        updateUserRoleResponse.setId( userRole.getId() );
+        role.setId( addUserRoleRequest.getRoleId() );
 
-        return updateUserRoleResponse;
+        return role;
     }
 
-    @Override
-    public DeleteUserRoleResponse deleteResponseFromId(UserRole userRole) {
-        if ( userRole == null ) {
+    protected User addUserRoleRequestToUser(AddUserRoleRequest addUserRoleRequest) {
+        if ( addUserRoleRequest == null ) {
             return null;
         }
 
-        DeleteUserRoleResponse deleteUserRoleResponse = new DeleteUserRoleResponse();
+        User user = new User();
 
-        deleteUserRoleResponse.setId( userRole.getId() );
+        user.setId( addUserRoleRequest.getUserId() );
 
-        return deleteUserRoleResponse;
+        return user;
+    }
+
+    protected Role updateUserRoleRequestToRole(UpdateUserRoleRequest updateUserRoleRequest) {
+        if ( updateUserRoleRequest == null ) {
+            return null;
+        }
+
+        Role role = new Role();
+
+        role.setId( updateUserRoleRequest.getRoleId() );
+
+        return role;
+    }
+
+    protected User updateUserRoleRequestToUser(UpdateUserRoleRequest updateUserRoleRequest) {
+        if ( updateUserRoleRequest == null ) {
+            return null;
+        }
+
+        User user = new User();
+
+        user.setId( updateUserRoleRequest.getUserId() );
+
+        return user;
     }
 
     protected ListUserRoleResponse userRoleToListUserRoleResponse(UserRole userRole) {

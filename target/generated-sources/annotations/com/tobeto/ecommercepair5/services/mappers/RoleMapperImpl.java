@@ -1,20 +1,20 @@
 package com.tobeto.ecommercepair5.services.mappers;
 
 import com.tobeto.ecommercepair5.entities.Role;
-import com.tobeto.ecommercepair5.services.dtos.requests.roles.AddRoleRequest;
-import com.tobeto.ecommercepair5.services.dtos.requests.roles.UpdateRoleRequest;
-import com.tobeto.ecommercepair5.services.dtos.responses.roles.AddRoleResponse;
-import com.tobeto.ecommercepair5.services.dtos.responses.roles.DeleteRoleResponse;
-import com.tobeto.ecommercepair5.services.dtos.responses.roles.GetRoleResponse;
-import com.tobeto.ecommercepair5.services.dtos.responses.roles.ListRoleResponse;
-import com.tobeto.ecommercepair5.services.dtos.responses.roles.UpdateRoleResponse;
+import com.tobeto.ecommercepair5.services.dtos.requests.role.AddRoleRequest;
+import com.tobeto.ecommercepair5.services.dtos.requests.role.UpdateRoleRequest;
+import com.tobeto.ecommercepair5.services.dtos.responses.role.AddRoleResponse;
+import com.tobeto.ecommercepair5.services.dtos.responses.role.DeleteRoleResponse;
+import com.tobeto.ecommercepair5.services.dtos.responses.role.GetRoleResponse;
+import com.tobeto.ecommercepair5.services.dtos.responses.role.ListRoleResponse;
+import com.tobeto.ecommercepair5.services.dtos.responses.role.UpdateRoleResponse;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-04-07T21:09:10+0300",
+    date = "2024-04-08T23:53:36+0300",
     comments = "version: 1.6.0.Beta1, compiler: javac, environment: Java 20.0.2 (Oracle Corporation)"
 )
 public class RoleMapperImpl implements RoleMapper {
@@ -26,8 +26,6 @@ public class RoleMapperImpl implements RoleMapper {
         }
 
         Role role = new Role();
-
-        role.setName( request.getName() );
 
         return role;
     }
@@ -47,34 +45,6 @@ public class RoleMapperImpl implements RoleMapper {
     }
 
     @Override
-    public GetRoleResponse getRoleResponse(Role role) {
-        if ( role == null ) {
-            return null;
-        }
-
-        GetRoleResponse getRoleResponse = new GetRoleResponse();
-
-        getRoleResponse.setId( role.getId() );
-        getRoleResponse.setName( role.getName() );
-
-        return getRoleResponse;
-    }
-
-    @Override
-    public List<ListRoleResponse> listRoleResponse(List<Role> roles) {
-        if ( roles == null ) {
-            return null;
-        }
-
-        List<ListRoleResponse> list = new ArrayList<ListRoleResponse>( roles.size() );
-        for ( Role role : roles ) {
-            list.add( roleToListRoleResponse( role ) );
-        }
-
-        return list;
-    }
-
-    @Override
     public Role roleFromUpdateRequest(UpdateRoleRequest request) {
         if ( request == null ) {
             return null;
@@ -83,7 +53,6 @@ public class RoleMapperImpl implements RoleMapper {
         Role role = new Role();
 
         role.setId( request.getId() );
-        role.setName( request.getName() );
 
         return role;
     }
@@ -103,7 +72,7 @@ public class RoleMapperImpl implements RoleMapper {
     }
 
     @Override
-    public DeleteRoleResponse deleteResponseFromId(Role role) {
+    public DeleteRoleResponse deleteResponseFromRole(Role role) {
         if ( role == null ) {
             return null;
         }
@@ -114,6 +83,34 @@ public class RoleMapperImpl implements RoleMapper {
         deleteRoleResponse.setName( role.getName() );
 
         return deleteRoleResponse;
+    }
+
+    @Override
+    public List<ListRoleResponse> listResponseFromRole(List<Role> roles) {
+        if ( roles == null ) {
+            return null;
+        }
+
+        List<ListRoleResponse> list = new ArrayList<ListRoleResponse>( roles.size() );
+        for ( Role role : roles ) {
+            list.add( roleToListRoleResponse( role ) );
+        }
+
+        return list;
+    }
+
+    @Override
+    public GetRoleResponse getRoleResponse(Role role) {
+        if ( role == null ) {
+            return null;
+        }
+
+        GetRoleResponse getRoleResponse = new GetRoleResponse();
+
+        getRoleResponse.setId( role.getId() );
+        getRoleResponse.setName( role.getName() );
+
+        return getRoleResponse;
     }
 
     protected ListRoleResponse roleToListRoleResponse(Role role) {

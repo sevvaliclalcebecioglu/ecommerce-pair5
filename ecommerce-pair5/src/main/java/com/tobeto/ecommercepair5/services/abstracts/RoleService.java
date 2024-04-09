@@ -1,8 +1,8 @@
 package com.tobeto.ecommercepair5.services.abstracts;
 
-import com.tobeto.ecommercepair5.services.dtos.requests.roles.AddRoleRequest;
-import com.tobeto.ecommercepair5.services.dtos.requests.roles.UpdateRoleRequest;
-import com.tobeto.ecommercepair5.services.dtos.responses.roles.*;
+import com.tobeto.ecommercepair5.services.dtos.requests.role.AddRoleRequest;
+import com.tobeto.ecommercepair5.services.dtos.requests.role.UpdateRoleRequest;
+import com.tobeto.ecommercepair5.services.dtos.responses.role.*;
 
 import java.util.List;
 

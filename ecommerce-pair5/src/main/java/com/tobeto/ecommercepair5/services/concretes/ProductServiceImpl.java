@@ -5,9 +5,9 @@ import com.tobeto.ecommercepair5.entities.Product;
 import com.tobeto.ecommercepair5.repositories.CategoryRepository;
 import com.tobeto.ecommercepair5.repositories.ProductRepository;
 import com.tobeto.ecommercepair5.services.abstracts.ProductService;
-import com.tobeto.ecommercepair5.services.dtos.requests.products.AddProductRequest;
-import com.tobeto.ecommercepair5.services.dtos.requests.products.UpdateProductRequest;
-import com.tobeto.ecommercepair5.services.dtos.responses.products.*;
+import com.tobeto.ecommercepair5.services.dtos.requests.product.AddProductRequest;
+import com.tobeto.ecommercepair5.services.dtos.requests.product.UpdateProductRequest;
+import com.tobeto.ecommercepair5.services.dtos.responses.product.*;
 import com.tobeto.ecommercepair5.services.mappers.ProductMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,9 +17,7 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class ProductServiceImpl implements ProductService {
-
     private ProductRepository productRepository;
-
     private CategoryRepository categoryRepository;
 
     @Override
@@ -27,9 +25,9 @@ public class ProductServiceImpl implements ProductService {
         Product product = ProductMapper.INSTANCE.productFromAddRequest(request);
         product = productRepository.save(product);
 
-        Category category = categoryRepository.findById(product.getCategory().getId()).orElseThrow() ;
+        Category category = categoryRepository.findById(product.getCategory().getId()).orElseThrow();
 
-        AddProductResponse addProductResponse = ProductMapper.INSTANCE.addResponseFromProduct(product , category);
+        AddProductResponse addProductResponse = ProductMapper.INSTANCE.addResponseFromProduct(product, category);
 
         return addProductResponse;
     }
@@ -37,11 +35,11 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public UpdateProductResponse update(UpdateProductRequest request) {
         Product product = ProductMapper.INSTANCE.productFromUpdateRequest(request);
-        product  = productRepository.save(product);
+        product = productRepository.save(product);
 
-        Category category = categoryRepository.findById(product.getCategory().getId()).orElseThrow() ;
+        Category category = categoryRepository.findById(product.getCategory().getId()).orElseThrow();
 
-        UpdateProductResponse updateProductResponse = ProductMapper.INSTANCE.updateResponseFromProduct(product , category);
+        UpdateProductResponse updateProductResponse = ProductMapper.INSTANCE.updateResponseFromProduct(product, category);
 
         return updateProductResponse;
     }
@@ -73,5 +71,10 @@ public class ProductServiceImpl implements ProductService {
         GetProductResponse getProductResponse = ProductMapper.INSTANCE.getProductResponse(product, category);
 
         return getProductResponse;
+    }
+
+    @Override
+    public List<ListProductResponse> search(String query) {
+        return productRepository.search(query);
     }
 }

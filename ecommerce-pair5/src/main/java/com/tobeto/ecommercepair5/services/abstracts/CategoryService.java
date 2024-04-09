@@ -1,8 +1,8 @@
 package com.tobeto.ecommercepair5.services.abstracts;
 
-import com.tobeto.ecommercepair5.services.dtos.requests.categories.AddCategoryRequest;
-import com.tobeto.ecommercepair5.services.dtos.requests.categories.UpdateCategoryRequest;
-import com.tobeto.ecommercepair5.services.dtos.responses.categories.*;
+import com.tobeto.ecommercepair5.services.dtos.requests.category.AddCategoryRequest;
+import com.tobeto.ecommercepair5.services.dtos.requests.category.UpdateCategoryRequest;
+import com.tobeto.ecommercepair5.services.dtos.responses.category.*;
 
 
 import java.util.List;

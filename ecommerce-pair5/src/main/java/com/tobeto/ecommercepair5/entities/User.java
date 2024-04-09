@@ -1,11 +1,13 @@
 package com.tobeto.ecommercepair5.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Table(name = "users")
@@ -20,8 +22,8 @@ public class User {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "firs_name")
-    private String firsName;
+    @Column(name = "first_name")
+    private String firstName;
 
     @Column(name = "last_name")
     private String lastName;
@@ -32,8 +34,15 @@ public class User {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "birth_date")
+    private LocalDate birthDate;
+
     @OneToMany(mappedBy = "user")
     private List<UserRole> userRoles;
+
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private List<Order> orders;
 
 
 }

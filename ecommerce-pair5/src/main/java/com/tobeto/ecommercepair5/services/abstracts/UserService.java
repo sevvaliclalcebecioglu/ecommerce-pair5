@@ -1,8 +1,8 @@
 package com.tobeto.ecommercepair5.services.abstracts;
 
-import com.tobeto.ecommercepair5.services.dtos.requests.users.AddUserRequest;
-import com.tobeto.ecommercepair5.services.dtos.requests.users.UpdateUserRequest;
-import com.tobeto.ecommercepair5.services.dtos.responses.users.*;
+import com.tobeto.ecommercepair5.services.dtos.requests.user.AddUserRequest;
+import com.tobeto.ecommercepair5.services.dtos.requests.user.UpdateUserRequest;
+import com.tobeto.ecommercepair5.services.dtos.responses.user.*;
 
 import java.util.List;
 

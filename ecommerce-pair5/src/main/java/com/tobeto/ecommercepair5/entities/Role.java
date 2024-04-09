@@ -21,7 +21,8 @@ public class Role {
     private int id;
 
     @Column(name = "name")
-    private String name;
+    @Enumerated(EnumType.STRING)
+    private EnumRole name;
 
     @OneToMany(mappedBy = "role")
     private List<UserRole> userRoles;

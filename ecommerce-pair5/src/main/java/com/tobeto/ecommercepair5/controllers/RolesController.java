@@ -1,9 +1,8 @@
 package com.tobeto.ecommercepair5.controllers;
 
 import com.tobeto.ecommercepair5.services.abstracts.RoleService;
-import com.tobeto.ecommercepair5.services.dtos.requests.roles.AddRoleRequest;
-import com.tobeto.ecommercepair5.services.dtos.requests.roles.UpdateRoleRequest;
-import com.tobeto.ecommercepair5.services.dtos.responses.roles.*;
+import com.tobeto.ecommercepair5.services.dtos.requests.role.*;
+import com.tobeto.ecommercepair5.services.dtos.responses.role.*;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,13 +14,10 @@ import java.util.List;
 @RequestMapping("/api/roles")
 @AllArgsConstructor
 public class RolesController {
-
     private RoleService roleService;
-
     @GetMapping
-    public List<ListRoleResponse> getAll()
-    {
-        return roleService.getAll();
+    public List<ListRoleResponse> getAll(){
+        return  roleService.getAll();
     }
 
     @PostMapping
@@ -32,20 +28,15 @@ public class RolesController {
     }
 
     @PutMapping
-    public UpdateRoleResponse update(@RequestBody @Valid UpdateRoleRequest request)
-    {
-        return roleService.update(request);
+    public UpdateRoleResponse update(@RequestBody @Valid UpdateRoleRequest request){
+        return  roleService.update(request);
     }
-
     @DeleteMapping
-    public DeleteRoleResponse delete(int id)
-    {
+    public DeleteRoleResponse delete(@RequestParam  int id){
         return roleService.delete(id);
     }
-
     @GetMapping(value = "/{id}")
-    public GetRoleResponse getById(@PathVariable int id)
-    {
+    public GetRoleResponse getById(@PathVariable int id) {
         return roleService.getById(id);
     }
 }

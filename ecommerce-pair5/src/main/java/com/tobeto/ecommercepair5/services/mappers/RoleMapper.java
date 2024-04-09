@@ -1,31 +1,23 @@
 package com.tobeto.ecommercepair5.services.mappers;
 
 import com.tobeto.ecommercepair5.entities.Role;
-import com.tobeto.ecommercepair5.services.dtos.requests.roles.AddRoleRequest;
-import com.tobeto.ecommercepair5.services.dtos.requests.roles.UpdateRoleRequest;
-import com.tobeto.ecommercepair5.services.dtos.responses.roles.*;
+import com.tobeto.ecommercepair5.entities.User;
+import com.tobeto.ecommercepair5.services.dtos.requests.role.*;
+import com.tobeto.ecommercepair5.services.dtos.responses.role.*;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
-
 @Mapper
 public interface RoleMapper {
-    RoleMapper INSTANCE = Mappers.getMapper(RoleMapper.class);
-
+    RoleMapper INSTANCE= Mappers.getMapper(RoleMapper.class);
     Role roleFromAddRequest(AddRoleRequest request);
-
     AddRoleResponse addResponseFromRole(Role role);
-
-    GetRoleResponse getRoleResponse(Role role);
-
-    List<ListRoleResponse> listRoleResponse(List<Role> roles);
-
     Role roleFromUpdateRequest(UpdateRoleRequest request);
-
     UpdateRoleResponse updateResponseFromRole(Role role);
-
-    @Mapping(target = "id", source = "id")
-    DeleteRoleResponse deleteResponseFromId(Role role);
+    @Mapping(target = "id" ,source="id")
+    DeleteRoleResponse deleteResponseFromRole(Role role);
+    List<ListRoleResponse> listResponseFromRole(List<Role> roles);
+    GetRoleResponse getRoleResponse(Role role);
 }

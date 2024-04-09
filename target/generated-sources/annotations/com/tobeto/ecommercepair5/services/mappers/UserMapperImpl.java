@@ -1,20 +1,22 @@
 package com.tobeto.ecommercepair5.services.mappers;
 
 import com.tobeto.ecommercepair5.entities.User;
-import com.tobeto.ecommercepair5.services.dtos.requests.users.AddUserRequest;
-import com.tobeto.ecommercepair5.services.dtos.requests.users.UpdateUserRequest;
-import com.tobeto.ecommercepair5.services.dtos.responses.roles.AddRoleResponse;
-import com.tobeto.ecommercepair5.services.dtos.responses.users.DeleteUserResponse;
-import com.tobeto.ecommercepair5.services.dtos.responses.users.GetUserResponse;
-import com.tobeto.ecommercepair5.services.dtos.responses.users.ListUserResponse;
-import com.tobeto.ecommercepair5.services.dtos.responses.users.UpdateUserResponse;
+import com.tobeto.ecommercepair5.services.dtos.requests.user.AddUserRequest;
+import com.tobeto.ecommercepair5.services.dtos.requests.user.UpdateUserRequest;
+import com.tobeto.ecommercepair5.services.dtos.responses.user.AddUserResponse;
+import com.tobeto.ecommercepair5.services.dtos.responses.user.DeleteUserResponse;
+import com.tobeto.ecommercepair5.services.dtos.responses.user.GetUserResponse;
+import com.tobeto.ecommercepair5.services.dtos.responses.user.ListUserResponse;
+import com.tobeto.ecommercepair5.services.dtos.responses.user.UpdateUserResponse;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-04-07T21:09:10+0300",
+    date = "2024-04-08T23:53:36+0300",
     comments = "version: 1.6.0.Beta1, compiler: javac, environment: Java 20.0.2 (Oracle Corporation)"
 )
 public class UserMapperImpl implements UserMapper {
@@ -27,55 +29,35 @@ public class UserMapperImpl implements UserMapper {
 
         User user = new User();
 
-        user.setFirsName( request.getFirsName() );
+        user.setFirstName( request.getFirstName() );
         user.setLastName( request.getLastName() );
         user.setEmail( request.getEmail() );
         user.setPassword( request.getPassword() );
+        if ( request.getBirthDate() != null ) {
+            user.setBirthDate( request.getBirthDate().toLocalDate() );
+        }
 
         return user;
     }
 
     @Override
-    public AddRoleResponse addResponseFromUser(User user) {
+    public AddUserResponse addResponseFromUser(User user) {
         if ( user == null ) {
             return null;
         }
 
-        AddRoleResponse addRoleResponse = new AddRoleResponse();
+        AddUserResponse addUserResponse = new AddUserResponse();
 
-        addRoleResponse.setId( user.getId() );
-
-        return addRoleResponse;
-    }
-
-    @Override
-    public GetUserResponse getUserResponse(User user) {
-        if ( user == null ) {
-            return null;
+        addUserResponse.setId( user.getId() );
+        if ( user.getBirthDate() != null ) {
+            addUserResponse.setBirthDate( user.getBirthDate().atStartOfDay() );
         }
+        addUserResponse.setEmail( user.getEmail() );
+        addUserResponse.setFirstName( user.getFirstName() );
+        addUserResponse.setLastName( user.getLastName() );
+        addUserResponse.setPassword( user.getPassword() );
 
-        GetUserResponse getUserResponse = new GetUserResponse();
-
-        getUserResponse.setId( user.getId() );
-        getUserResponse.setEmail( user.getEmail() );
-        getUserResponse.setFirsName( user.getFirsName() );
-        getUserResponse.setLastName( user.getLastName() );
-
-        return getUserResponse;
-    }
-
-    @Override
-    public List<ListUserResponse> listUserResponse(List<User> users) {
-        if ( users == null ) {
-            return null;
-        }
-
-        List<ListUserResponse> list = new ArrayList<ListUserResponse>( users.size() );
-        for ( User user : users ) {
-            list.add( userToListUserResponse( user ) );
-        }
-
-        return list;
+        return addUserResponse;
     }
 
     @Override
@@ -87,10 +69,13 @@ public class UserMapperImpl implements UserMapper {
         User user = new User();
 
         user.setId( request.getId() );
-        user.setFirsName( request.getFirsName() );
+        user.setFirstName( request.getFirstName() );
         user.setLastName( request.getLastName() );
         user.setEmail( request.getEmail() );
         user.setPassword( request.getPassword() );
+        if ( request.getBirthDate() != null ) {
+            user.setBirthDate( request.getBirthDate().toLocalDate() );
+        }
 
         return user;
     }
@@ -104,15 +89,18 @@ public class UserMapperImpl implements UserMapper {
         UpdateUserResponse updateUserResponse = new UpdateUserResponse();
 
         updateUserResponse.setId( user.getId() );
+        if ( user.getBirthDate() != null ) {
+            updateUserResponse.setBirthDate( user.getBirthDate().atStartOfDay() );
+        }
         updateUserResponse.setEmail( user.getEmail() );
-        updateUserResponse.setFirsName( user.getFirsName() );
+        updateUserResponse.setFirstName( user.getFirstName() );
         updateUserResponse.setLastName( user.getLastName() );
 
         return updateUserResponse;
     }
 
     @Override
-    public DeleteUserResponse deleteResponseFromId(User user) {
+    public DeleteUserResponse deleteResponseFromUser(User user) {
         if ( user == null ) {
             return null;
         }
@@ -121,10 +109,43 @@ public class UserMapperImpl implements UserMapper {
 
         deleteUserResponse.setId( user.getId() );
         deleteUserResponse.setEmail( user.getEmail() );
-        deleteUserResponse.setFirsName( user.getFirsName() );
+        deleteUserResponse.setFirstName( user.getFirstName() );
         deleteUserResponse.setLastName( user.getLastName() );
 
         return deleteUserResponse;
+    }
+
+    @Override
+    public List<ListUserResponse> listResponseFromUser(List<User> users) {
+        if ( users == null ) {
+            return null;
+        }
+
+        List<ListUserResponse> list = new ArrayList<ListUserResponse>( users.size() );
+        for ( User user : users ) {
+            list.add( userToListUserResponse( user ) );
+        }
+
+        return list;
+    }
+
+    @Override
+    public GetUserResponse getUserResponse(User user) {
+        if ( user == null ) {
+            return null;
+        }
+
+        GetUserResponse getUserResponse = new GetUserResponse();
+
+        getUserResponse.setId( user.getId() );
+        if ( user.getBirthDate() != null ) {
+            getUserResponse.setBirthDate( user.getBirthDate().atStartOfDay() );
+        }
+        getUserResponse.setEmail( user.getEmail() );
+        getUserResponse.setFirstName( user.getFirstName() );
+        getUserResponse.setLastName( user.getLastName() );
+
+        return getUserResponse;
     }
 
     protected ListUserResponse userToListUserResponse(User user) {
@@ -135,8 +156,11 @@ public class UserMapperImpl implements UserMapper {
         ListUserResponse listUserResponse = new ListUserResponse();
 
         listUserResponse.setId( user.getId() );
+        if ( user.getBirthDate() != null ) {
+            listUserResponse.setBirthDate( user.getBirthDate().atStartOfDay() );
+        }
         listUserResponse.setEmail( user.getEmail() );
-        listUserResponse.setFirsName( user.getFirsName() );
+        listUserResponse.setFirstName( user.getFirstName() );
         listUserResponse.setLastName( user.getLastName() );
 
         return listUserResponse;

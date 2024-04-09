@@ -1,20 +1,21 @@
 package com.tobeto.ecommercepair5.services.mappers;
 
 import com.tobeto.ecommercepair5.entities.Order;
-import com.tobeto.ecommercepair5.services.dtos.requests.orders.AddOrderRequest;
-import com.tobeto.ecommercepair5.services.dtos.requests.orders.UpdateOrderRequest;
-import com.tobeto.ecommercepair5.services.dtos.responses.orders.AddOrderResponse;
-import com.tobeto.ecommercepair5.services.dtos.responses.orders.DeleteOrderResponse;
-import com.tobeto.ecommercepair5.services.dtos.responses.orders.GetOrderResponse;
-import com.tobeto.ecommercepair5.services.dtos.responses.orders.ListOrderResponse;
-import com.tobeto.ecommercepair5.services.dtos.responses.orders.UpdateOrderResponse;
+import com.tobeto.ecommercepair5.entities.User;
+import com.tobeto.ecommercepair5.services.dtos.requests.order.AddOrderRequest;
+import com.tobeto.ecommercepair5.services.dtos.requests.order.UpdateOrderRequest;
+import com.tobeto.ecommercepair5.services.dtos.responses.order.AddOrderResponse;
+import com.tobeto.ecommercepair5.services.dtos.responses.order.DeleteOrderResponse;
+import com.tobeto.ecommercepair5.services.dtos.responses.order.GetOrderResponse;
+import com.tobeto.ecommercepair5.services.dtos.responses.order.ListOrderResponse;
+import com.tobeto.ecommercepair5.services.dtos.responses.order.UpdateOrderResponse;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-04-07T19:27:18+0300",
+    date = "2024-04-08T23:53:36+0300",
     comments = "version: 1.6.0.Beta1, compiler: javac, environment: Java 20.0.2 (Oracle Corporation)"
 )
 public class OrderMapperImpl implements OrderMapper {
@@ -27,7 +28,12 @@ public class OrderMapperImpl implements OrderMapper {
 
         Order order = new Order();
 
-        order.setDate( request.getDate() );
+        order.setUser( addOrderRequestToUser( request ) );
+        order.setCreatedDate( request.getCreatedDate() );
+        order.setShipmentDate( request.getShipmentDate() );
+        order.setDeliveredDate( request.getDeliveredDate() );
+        order.setReturnedDate( request.getReturnedDate() );
+        order.setStatus( request.getStatus() );
 
         return order;
     }
@@ -40,26 +46,68 @@ public class OrderMapperImpl implements OrderMapper {
 
         AddOrderResponse addOrderResponse = new AddOrderResponse();
 
+        addOrderResponse.setUserId( orderUserId( order ) );
         addOrderResponse.setId( order.getId() );
-        addOrderResponse.setDate( order.getDate() );
+        addOrderResponse.setCreatedDate( order.getCreatedDate() );
+        addOrderResponse.setShipmentDate( order.getShipmentDate() );
+        addOrderResponse.setDeliveredDate( order.getDeliveredDate() );
+        addOrderResponse.setReturnedDate( order.getReturnedDate() );
         addOrderResponse.setStatus( order.getStatus() );
 
         return addOrderResponse;
     }
 
     @Override
-    public GetOrderResponse getOrderResponse(Order order) {
+    public Order orderFromUpdateRequest(UpdateOrderRequest request) {
+        if ( request == null ) {
+            return null;
+        }
+
+        Order order = new Order();
+
+        order.setId( request.getId() );
+        order.setShipmentDate( request.getShipmentDate() );
+        order.setDeliveredDate( request.getDeliveredDate() );
+        order.setReturnedDate( request.getReturnedDate() );
+        order.setStatus( request.getStatus() );
+
+        return order;
+    }
+
+    @Override
+    public UpdateOrderResponse updateResponseFromOrder(Order order) {
         if ( order == null ) {
             return null;
         }
 
-        GetOrderResponse getOrderResponse = new GetOrderResponse();
+        UpdateOrderResponse updateOrderResponse = new UpdateOrderResponse();
 
-        getOrderResponse.setId( order.getId() );
-        getOrderResponse.setDate( order.getDate() );
-        getOrderResponse.setStatus( order.getStatus() );
+        updateOrderResponse.setId( order.getId() );
+        updateOrderResponse.setCreatedDate( order.getCreatedDate() );
+        updateOrderResponse.setShipmentDate( order.getShipmentDate() );
+        updateOrderResponse.setDeliveredDate( order.getDeliveredDate() );
+        updateOrderResponse.setReturnedDate( order.getReturnedDate() );
+        updateOrderResponse.setStatus( order.getStatus() );
 
-        return getOrderResponse;
+        return updateOrderResponse;
+    }
+
+    @Override
+    public DeleteOrderResponse deleteResponseFromId(Order order) {
+        if ( order == null ) {
+            return null;
+        }
+
+        DeleteOrderResponse deleteOrderResponse = new DeleteOrderResponse();
+
+        deleteOrderResponse.setId( order.getId() );
+        deleteOrderResponse.setCreatedDate( order.getCreatedDate() );
+        deleteOrderResponse.setShipmentDate( order.getShipmentDate() );
+        deleteOrderResponse.setDeliveredDate( order.getDeliveredDate() );
+        deleteOrderResponse.setReturnedDate( order.getReturnedDate() );
+        deleteOrderResponse.setStatus( order.getStatus() );
+
+        return deleteOrderResponse;
     }
 
     @Override
@@ -77,48 +125,46 @@ public class OrderMapperImpl implements OrderMapper {
     }
 
     @Override
-    public Order orderFromUpdateRequest(UpdateOrderRequest request) {
-        if ( request == null ) {
+    public GetOrderResponse getOrderResponse(Order order, User user) {
+        if ( order == null && user == null ) {
             return null;
         }
 
-        Order order = new Order();
+        GetOrderResponse getOrderResponse = new GetOrderResponse();
 
-        order.setId( request.getId() );
-        order.setDate( request.getDate() );
-        order.setStatus( request.getStatus() );
+        if ( order != null ) {
+            getOrderResponse.setId( order.getId() );
+            getOrderResponse.setCreatedDate( order.getCreatedDate() );
+            getOrderResponse.setShipmentDate( order.getShipmentDate() );
+            getOrderResponse.setDeliveredDate( order.getDeliveredDate() );
+            getOrderResponse.setReturnedDate( order.getReturnedDate() );
+            getOrderResponse.setStatus( order.getStatus() );
+        }
+        if ( user != null ) {
+            getOrderResponse.setUserId( user.getId() );
+        }
 
-        return order;
+        return getOrderResponse;
     }
 
-    @Override
-    public UpdateOrderResponse updateResponseFromOrder(Order order) {
-        if ( order == null ) {
+    protected User addOrderRequestToUser(AddOrderRequest addOrderRequest) {
+        if ( addOrderRequest == null ) {
             return null;
         }
 
-        UpdateOrderResponse updateOrderResponse = new UpdateOrderResponse();
+        User user = new User();
 
-        updateOrderResponse.setId( order.getId() );
-        updateOrderResponse.setDate( order.getDate() );
-        updateOrderResponse.setStatus( order.getStatus() );
+        user.setId( addOrderRequest.getUserId() );
 
-        return updateOrderResponse;
+        return user;
     }
 
-    @Override
-    public DeleteOrderResponse deleteResponseFromId(Order order) {
-        if ( order == null ) {
-            return null;
+    private int orderUserId(Order order) {
+        User user = order.getUser();
+        if ( user == null ) {
+            return 0;
         }
-
-        DeleteOrderResponse deleteOrderResponse = new DeleteOrderResponse();
-
-        deleteOrderResponse.setId( order.getId() );
-        deleteOrderResponse.setDate( order.getDate() );
-        deleteOrderResponse.setStatus( order.getStatus() );
-
-        return deleteOrderResponse;
+        return user.getId();
     }
 
     protected ListOrderResponse orderToListOrderResponse(Order order) {
@@ -129,7 +175,10 @@ public class OrderMapperImpl implements OrderMapper {
         ListOrderResponse listOrderResponse = new ListOrderResponse();
 
         listOrderResponse.setId( order.getId() );
-        listOrderResponse.setDate( order.getDate() );
+        listOrderResponse.setCreatedDate( order.getCreatedDate() );
+        listOrderResponse.setShipmentDate( order.getShipmentDate() );
+        listOrderResponse.setDeliveredDate( order.getDeliveredDate() );
+        listOrderResponse.setReturnedDate( order.getReturnedDate() );
         listOrderResponse.setStatus( order.getStatus() );
 
         return listOrderResponse;
