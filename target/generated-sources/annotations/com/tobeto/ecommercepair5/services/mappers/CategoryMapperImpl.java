@@ -14,7 +14,7 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-04-08T23:53:36+0300",
+    date = "2024-04-09T14:55:03+0300",
     comments = "version: 1.6.0.Beta1, compiler: javac, environment: Java 20.0.2 (Oracle Corporation)"
 )
 public class CategoryMapperImpl implements CategoryMapper {
@@ -34,20 +34,16 @@ public class CategoryMapperImpl implements CategoryMapper {
     }
 
     @Override
-    public AddCategoryResponse addResponseFromCategory(Category category, Category parent) {
-        if ( category == null && parent == null ) {
+    public AddCategoryResponse addResponseFromCategory(Category category) {
+        if ( category == null ) {
             return null;
         }
 
         AddCategoryResponse addCategoryResponse = new AddCategoryResponse();
 
-        if ( category != null ) {
-            addCategoryResponse.setId( category.getId() );
-            addCategoryResponse.setName( category.getName() );
-        }
-        if ( parent != null ) {
-            addCategoryResponse.setParentName( parent.getName() );
-        }
+        addCategoryResponse.setParentName( categoryParentName( category ) );
+        addCategoryResponse.setId( category.getId() );
+        addCategoryResponse.setName( category.getName() );
 
         return addCategoryResponse;
     }
@@ -65,6 +61,20 @@ public class CategoryMapperImpl implements CategoryMapper {
         category.setName( request.getName() );
 
         return category;
+    }
+
+    @Override
+    public UpdateCategoryResponse updateResponseFromCategory(Category category) {
+        if ( category == null ) {
+            return null;
+        }
+
+        UpdateCategoryResponse updateCategoryResponse = new UpdateCategoryResponse();
+
+        updateCategoryResponse.setId( category.getId() );
+        updateCategoryResponse.setName( category.getName() );
+
+        return updateCategoryResponse;
     }
 
     @Override
@@ -143,6 +153,14 @@ public class CategoryMapperImpl implements CategoryMapper {
         category.setId( addCategoryRequest.getParentId() );
 
         return category;
+    }
+
+    private String categoryParentName(Category category) {
+        Category parent = category.getParent();
+        if ( parent == null ) {
+            return null;
+        }
+        return parent.getName();
     }
 
     protected Category updateCategoryRequestToCategory(UpdateCategoryRequest updateCategoryRequest) {

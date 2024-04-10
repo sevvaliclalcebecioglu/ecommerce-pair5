@@ -1,7 +1,5 @@
 package com.tobeto.ecommercepair5.controllers;
 
-import com.tobeto.ecommercepair5.entities.Product;
-import com.tobeto.ecommercepair5.repositories.ProductRepository;
 import com.tobeto.ecommercepair5.services.abstracts.ProductService;
 import com.tobeto.ecommercepair5.services.dtos.requests.product.AddProductRequest;
 import com.tobeto.ecommercepair5.services.dtos.requests.product.UpdateProductRequest;
@@ -11,6 +9,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -18,8 +17,6 @@ import java.util.List;
 @AllArgsConstructor
 public class ProductsController {
     private ProductService productService;
-
-    private ProductRepository productRepository;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -38,13 +35,37 @@ public class ProductsController {
     }
 
     @GetMapping
-    public List<ListProductResponse> search(@RequestParam String query)
-    {
-        return productService.search(query);
+    public List<ListProductResponse> response() {
+        return productService.getAll();
     }
 
     @GetMapping("/{getById}")
     public GetProductResponse getById(@PathVariable int getById) {
         return productService.getById(getById);
+    }
+
+    @GetMapping("/searchByName")
+    public List<ListProductResponse> searchByName(@RequestParam String name) {
+        return productService.searchByName(name);
+    }
+
+    @GetMapping("/searchByUnitPrice")
+    public List<ListProductResponse> searchByUnitPrice(@RequestParam double minPrice, @RequestParam double maxPrice) {
+        return productService.searchByUnitPrice(minPrice,maxPrice);
+    }
+
+    @GetMapping("/searchByCategory")
+    public List<ListProductResponse> searchByUnitPrice(@RequestParam int id) {
+        return productService.searchByCategory(id);
+    }
+
+//    @GetMapping("/searchByNewProduct")
+//    public List<ListProductResponse> searchByNewProduct() {
+//        return productService.searchByNewProduct();
+//    }
+
+    @GetMapping("/topSeller")
+    public List<ListProductResponse> searchTopSeller() {
+        return productService.topSeller();
     }
 }

@@ -74,7 +74,27 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ListProductResponse> search(String query) {
-        return productRepository.search(query);
+    public List<ListProductResponse> searchByName(String name) {
+        return productRepository.searchByName(name);
+    }
+
+    @Override
+    public List<ListProductResponse> searchByUnitPrice(double minPrice, double maxPrice) {
+        return productRepository.searchByUnitPrice(minPrice, maxPrice);
+    }
+
+    @Override
+    public List<ListProductResponse> searchByCategory(int category) {
+        return productRepository.searchByCategory(category);
+    }
+
+//    @Override
+//    public List<ListProductResponse> searchByNewProduct() {
+//        return productRepository.searchByNewProduct();
+//    }
+
+    @Override
+    public List<ListProductResponse> topSeller() {
+        return productRepository.topSeller();
     }
 }
