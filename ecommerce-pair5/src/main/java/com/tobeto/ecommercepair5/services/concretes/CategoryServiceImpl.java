@@ -21,7 +21,6 @@ public class CategoryServiceImpl implements CategoryService {
     public AddCategoryResponse add(AddCategoryRequest request) {
         Category category = CategoryMapper.INSTANCE.categoryFromAddRequest(request);
 
-        //TODO: Do this better way
         CategoryMapper.INSTANCE.handleRequestAfterMapping(request, category, categoryRepository);
 
         category = categoryRepository.save(category);
@@ -45,7 +44,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public DeleteCategoryResponse delete(int id) {
+    public DeleteCategoryResponse delete(Integer id) {
         Category category = categoryRepository.findById(id).orElseThrow();
 
         DeleteCategoryResponse deleteCategoryResponse = CategoryMapper.INSTANCE.deleteResponseFromId(category);
@@ -65,7 +64,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public GetCategoryResponse getById(int id) {
+    public GetCategoryResponse getById(Integer id) {
         Category category = categoryRepository.findById(id).orElseThrow();
         Category parentCategory = categoryRepository.findById(category.getParent().getId()).orElseThrow();
         GetCategoryResponse getCategoryResponse = CategoryMapper.INSTANCE.getCategoryResponse(category, parentCategory);

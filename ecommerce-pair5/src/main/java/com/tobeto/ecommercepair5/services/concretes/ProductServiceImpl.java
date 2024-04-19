@@ -12,6 +12,8 @@ import com.tobeto.ecommercepair5.services.mappers.ProductMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -57,11 +59,18 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<ListProductResponse> getAll() {
+        Category category;
         List<Product> products = productRepository.findAll();
+        List<ListProductResponse> response = new ArrayList<>();
 
-        List<ListProductResponse> responses = ProductMapper.INSTANCE.listProductResponse(products);
+        for (Product product : products) {
+            category = categoryRepository.findById(product.getCategory().getId()).orElseThrow();
+            ListProductResponse listProductResponse = ProductMapper.INSTANCE.productToListProductResponse(product, category);
 
-        return responses;
+            response.add(listProductResponse);
+        }
+
+        return response;
     }
 
     @Override
@@ -88,10 +97,13 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.searchByCategory(category);
     }
 
-//    @Override
-//    public List<ListProductResponse> searchByNewProduct() {
-//        return productRepository.searchByNewProduct();
-//    }
+    @Override
+    public List<ListProductResponse> searchByNewProduct() {
+        LocalDate endDate = LocalDate.now();
+        LocalDate startDate = endDate.minusMonths(1);
+
+        return productRepository.searchByNewProduct(startDate, endDate);
+    }
 
     @Override
     public List<ListProductResponse> topSeller() {

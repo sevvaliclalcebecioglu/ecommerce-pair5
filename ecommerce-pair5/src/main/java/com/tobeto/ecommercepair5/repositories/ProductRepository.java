@@ -4,8 +4,10 @@ import com.tobeto.ecommercepair5.entities.Product;
 import com.tobeto.ecommercepair5.services.dtos.responses.product.ListProductResponse;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface ProductRepository extends JpaRepository<Product, Integer> {
@@ -31,4 +33,11 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
          " ORDER BY SUM(od.quantity) DESC" +
          " LIMIT 1")
  List<ListProductResponse> topSeller();
+
+ //TODO: JPQL Koduna çevrilmeli
+ @Query(value = "SELECT NEW com.tobeto.ecommercepair5.services.dtos.responses.product.ListProductResponse(p.id, p.name, p.description, p.unitPrice)" +
+         " FROM Product AS p" +
+         " WHERE p.addedDate >= :startDate" +
+         " AND p.addedDate <= :endDate")
+ List<ListProductResponse> searchByNewProduct(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 }

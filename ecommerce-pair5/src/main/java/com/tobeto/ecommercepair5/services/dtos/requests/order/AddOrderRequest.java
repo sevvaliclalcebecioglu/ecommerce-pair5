@@ -1,6 +1,7 @@
 package com.tobeto.ecommercepair5.services.dtos.requests.order;
 
 import com.tobeto.ecommercepair5.entities.OrderStatus;
+import com.tobeto.ecommercepair5.services.dtos.requests.orderdetail.AddOrderDetailRequest;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.FutureOrPresent;
@@ -12,6 +13,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -21,6 +23,8 @@ public class AddOrderRequest {
 
     @NotNull
     private int userId;
+
+    private List<AddOrderDetailRequest> orderDetails;
 
     @NotNull //siparişin oluşturma tarihi null olmamalı
     @FutureOrPresent // geçmiş bir tarih olmamalı

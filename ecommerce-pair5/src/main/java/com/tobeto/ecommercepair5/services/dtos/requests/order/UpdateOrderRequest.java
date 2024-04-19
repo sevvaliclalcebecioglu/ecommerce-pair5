@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UpdateOrderRequest {
-    @NotNull
+    @NotNull(message = "You must enter an id.")
     private int id;
 
     @PastOrPresent // güncellenen siparişin sevk tarihinin geçmiş veya mevcut bir tarih olması gerektiğini belirtir.

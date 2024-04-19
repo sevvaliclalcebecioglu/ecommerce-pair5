@@ -14,15 +14,15 @@ import java.time.LocalDate;
 public class UpdateProductResponse {
     private int id;
 
-    private String categoryName;
-
     private String name;
+
+    private String categoryName;
 
     private String description;
 
-    private int stock;
+    private double unitPrice;
 
-    private int unitPrice;
+    private int stock;
 
     private LocalDate addedDate;
 }

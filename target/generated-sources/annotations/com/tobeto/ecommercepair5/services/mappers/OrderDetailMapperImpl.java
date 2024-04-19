@@ -16,7 +16,7 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-04-08T23:53:36+0300",
+    date = "2024-04-19T10:44:57+0300",
     comments = "version: 1.6.0.Beta1, compiler: javac, environment: Java 20.0.2 (Oracle Corporation)"
 )
 public class OrderDetailMapperImpl implements OrderDetailMapper {
@@ -33,6 +33,26 @@ public class OrderDetailMapperImpl implements OrderDetailMapper {
         orderDetail.setProduct( addOrderDetailRequestToProduct( request ) );
         orderDetail.setQuantity( request.getQuantity() );
         orderDetail.setTotalPrice( request.getTotalPrice() );
+
+        return orderDetail;
+    }
+
+    @Override
+    public OrderDetail orderDetailFromAddRequestForOrder(AddOrderDetailRequest request, Order order) {
+        if ( request == null && order == null ) {
+            return null;
+        }
+
+        OrderDetail orderDetail = new OrderDetail();
+
+        if ( request != null ) {
+            orderDetail.setProduct( addOrderDetailRequestToProduct1( request ) );
+            orderDetail.setQuantity( request.getQuantity() );
+            orderDetail.setTotalPrice( request.getTotalPrice() );
+        }
+        if ( order != null ) {
+            orderDetail.setId( order.getId() );
+        }
 
         return orderDetail;
     }
@@ -160,6 +180,18 @@ public class OrderDetailMapperImpl implements OrderDetailMapper {
     }
 
     protected Product addOrderDetailRequestToProduct(AddOrderDetailRequest addOrderDetailRequest) {
+        if ( addOrderDetailRequest == null ) {
+            return null;
+        }
+
+        Product product = new Product();
+
+        product.setId( addOrderDetailRequest.getProductId() );
+
+        return product;
+    }
+
+    protected Product addOrderDetailRequestToProduct1(AddOrderDetailRequest addOrderDetailRequest) {
         if ( addOrderDetailRequest == null ) {
             return null;
         }

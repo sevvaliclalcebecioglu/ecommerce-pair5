@@ -20,6 +20,9 @@ public interface OrderDetailMapper {
     @Mapping(target = "product.id", source = "productId")
     OrderDetail orderDetailFromAddRequest(AddOrderDetailRequest request);
 
+    @Mapping(target = "product.id", source = "request.productId")
+    OrderDetail orderDetailFromAddRequestForOrder(AddOrderDetailRequest request, Order order);
+
     @Mapping(target = "productName", source = "product.name")
     @Mapping(target = "id", source = "orderDetail.id")
     @Mapping(target = "order", source = "order")

@@ -16,20 +16,18 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class AddProductRequest {
 
-    @NotEmpty(message = "Aynı isimle iki ürün eklenemez")
+    @NotEmpty(message = "Product name cannot be empty.")
     private String name;
 
     private int categoryId;
 
     private String description;
 
-    @PositiveOrZero(message = "Stok miktarı negatif olamaz")
-    private int stock;
-
-    @PositiveOrZero(message = "Birim fiyatı 0'dan düşük olamaz.")
+    @PositiveOrZero(message = "Stock quantity cannot be negative")
     private double unitPrice;
 
+    @PositiveOrZero(message = "Stock quantity cannot be negative")
+    private int stock;
+
     private LocalDate addedDate;
-
-
 }

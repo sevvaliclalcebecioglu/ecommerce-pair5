@@ -12,12 +12,14 @@ import com.tobeto.ecommercepair5.services.dtos.responses.product.UpdateProductRe
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
+import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-04-08T23:53:36+0300",
+    date = "2024-04-19T10:44:56+0300",
     comments = "version: 1.6.0.Beta1, compiler: javac, environment: Java 20.0.2 (Oracle Corporation)"
 )
+@Component
 public class ProductMapperImpl implements ProductMapper {
 
     @Override
@@ -92,8 +94,8 @@ public class ProductMapperImpl implements ProductMapper {
             updateProductResponse.setId( product.getId() );
             updateProductResponse.setName( product.getName() );
             updateProductResponse.setDescription( product.getDescription() );
-            updateProductResponse.setStock( product.getStock() );
             updateProductResponse.setUnitPrice( product.getUnitPrice() );
+            updateProductResponse.setStock( product.getStock() );
             updateProductResponse.setAddedDate( product.getAddedDate() );
         }
         if ( category != null ) {
@@ -122,14 +124,37 @@ public class ProductMapperImpl implements ProductMapper {
     }
 
     @Override
-    public List<ListProductResponse> listProductResponse(List<Product> products) {
+    public ListProductResponse productToListProductResponse(Product product, Category category) {
+        if ( product == null && category == null ) {
+            return null;
+        }
+
+        ListProductResponse listProductResponse = new ListProductResponse();
+
+        if ( product != null ) {
+            listProductResponse.setId( product.getId() );
+            listProductResponse.setName( product.getName() );
+            listProductResponse.setDescription( product.getDescription() );
+            listProductResponse.setUnitPrice( product.getUnitPrice() );
+            listProductResponse.setStock( product.getStock() );
+            listProductResponse.setAddedDate( product.getAddedDate() );
+        }
+        if ( category != null ) {
+            listProductResponse.setCategoryName( category.getName() );
+        }
+
+        return listProductResponse;
+    }
+
+    @Override
+    public List<ListProductResponse> productListToListProductResponseList(List<Product> products) {
         if ( products == null ) {
             return null;
         }
 
         List<ListProductResponse> list = new ArrayList<ListProductResponse>( products.size() );
         for ( Product product : products ) {
-            list.add( productToListProductResponse( product ) );
+            list.add( productToListProductResponse1( product ) );
         }
 
         return list;
@@ -182,7 +207,7 @@ public class ProductMapperImpl implements ProductMapper {
         return category;
     }
 
-    protected ListProductResponse productToListProductResponse(Product product) {
+    protected ListProductResponse productToListProductResponse1(Product product) {
         if ( product == null ) {
             return null;
         }
@@ -192,8 +217,8 @@ public class ProductMapperImpl implements ProductMapper {
         listProductResponse.setId( product.getId() );
         listProductResponse.setName( product.getName() );
         listProductResponse.setDescription( product.getDescription() );
-        listProductResponse.setStock( product.getStock() );
         listProductResponse.setUnitPrice( product.getUnitPrice() );
+        listProductResponse.setStock( product.getStock() );
         listProductResponse.setAddedDate( product.getAddedDate() );
 
         return listProductResponse;

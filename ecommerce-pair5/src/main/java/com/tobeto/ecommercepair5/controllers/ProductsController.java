@@ -59,10 +59,10 @@ public class ProductsController {
         return productService.searchByCategory(id);
     }
 
-//    @GetMapping("/searchByNewProduct")
-//    public List<ListProductResponse> searchByNewProduct() {
-//        return productService.searchByNewProduct();
-//    }
+    @GetMapping("/searchByNewProduct")
+    public List<ListProductResponse> searchByNewProduct() {
+        return productService.searchByNewProduct();
+    }
 
     @GetMapping("/topSeller")
     public List<ListProductResponse> searchTopSeller() {

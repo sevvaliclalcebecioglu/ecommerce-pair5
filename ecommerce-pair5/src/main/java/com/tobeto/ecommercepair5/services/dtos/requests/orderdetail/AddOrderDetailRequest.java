@@ -14,11 +14,11 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AddOrderDetailRequest {
-    @NotNull
+    @NotNull(message = "You must enter a product id.")
     @Positive // 0'dan büyük bir değere sahip olmalı
     private int productId; // sipariş detayı hangi ürüne ait
 
-    @NotNull
+    @NotNull(message = "You must enter an order id.")
     @Positive
     private int orderId; // sipariş detayı hangi siparişe ait
 

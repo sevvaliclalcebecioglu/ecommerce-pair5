@@ -7,6 +7,7 @@ import com.tobeto.ecommercepair5.services.dtos.responses.orderdetail.*;
 
 import java.util.List;
 
+
 public interface OrderDetailService {
     AddOrderDetailResponse add(AddOrderDetailRequest request);
     UpdateOrderDetailResponse update(UpdateOrderDetailRequest request);

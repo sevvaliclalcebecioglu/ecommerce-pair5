@@ -16,7 +16,7 @@ public interface ProductService {
     List<ListProductResponse> searchByName(String name);
     List<ListProductResponse> searchByUnitPrice(double minPrice, double maxPrice);
     List<ListProductResponse> searchByCategory(int category);
-    //List<ListProductResponse> searchByNewProduct();
+    List<ListProductResponse> searchByNewProduct();
     List<ListProductResponse> topSeller();
 
 }

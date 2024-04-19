@@ -10,7 +10,8 @@ import java.util.List;
 public interface CategoryService {
     AddCategoryResponse add(AddCategoryRequest request);
     UpdateCategoryResponse update(UpdateCategoryRequest request);
-    DeleteCategoryResponse delete(int id);
+    DeleteCategoryResponse delete(Integer id);
     List<ListCategoryResponse> getAll();
-    GetCategoryResponse getById(int id);
+    GetCategoryResponse getById(Integer id);
+
 }

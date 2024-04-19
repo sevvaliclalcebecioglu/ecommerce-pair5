@@ -11,7 +11,7 @@ import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
-@Mapper
+@Mapper(componentModel = "spring", uses = {CategoryMapper.class})
 public interface ProductMapper {
     ProductMapper INSTANCE = Mappers.getMapper(ProductMapper.class);
 
@@ -34,7 +34,12 @@ public interface ProductMapper {
     @Mapping(target = "id", source = "id")
     DeleteProductResponse deleteResponseFromId(Product product);
 
-    List<ListProductResponse> listProductResponse(List<Product> products);
+    @Mapping(target = "id", source = "product.id")
+    @Mapping(target = "name", source = "product.name")
+    @Mapping(target = "categoryName", source = "category.name")
+    ListProductResponse productToListProductResponse(Product product, Category category);
+
+    List<ListProductResponse> productListToListProductResponseList(List<Product> products);
 
 //    @Mapping(target = "id", source = "products.id")
 //    @Mapping(target = "name", source = "products.name")

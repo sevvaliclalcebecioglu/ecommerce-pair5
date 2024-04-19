@@ -14,7 +14,7 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-04-09T14:55:03+0300",
+    date = "2024-04-19T10:44:57+0300",
     comments = "version: 1.6.0.Beta1, compiler: javac, environment: Java 20.0.2 (Oracle Corporation)"
 )
 public class CategoryMapperImpl implements CategoryMapper {
@@ -57,7 +57,9 @@ public class CategoryMapperImpl implements CategoryMapper {
         Category category = new Category();
 
         category.setParent( updateCategoryRequestToCategory( request ) );
-        category.setId( request.getId() );
+        if ( request.getId() != null ) {
+            category.setId( request.getId() );
+        }
         category.setName( request.getName() );
 
         return category;
@@ -71,27 +73,9 @@ public class CategoryMapperImpl implements CategoryMapper {
 
         UpdateCategoryResponse updateCategoryResponse = new UpdateCategoryResponse();
 
+        updateCategoryResponse.setParentName( categoryParentName( category ) );
         updateCategoryResponse.setId( category.getId() );
         updateCategoryResponse.setName( category.getName() );
-
-        return updateCategoryResponse;
-    }
-
-    @Override
-    public UpdateCategoryResponse updateResponseFromCategory(Category category, Category parent) {
-        if ( category == null && parent == null ) {
-            return null;
-        }
-
-        UpdateCategoryResponse updateCategoryResponse = new UpdateCategoryResponse();
-
-        if ( category != null ) {
-            updateCategoryResponse.setId( category.getId() );
-            updateCategoryResponse.setName( category.getName() );
-        }
-        if ( parent != null ) {
-            updateCategoryResponse.setParentName( parent.getName() );
-        }
 
         return updateCategoryResponse;
     }
@@ -150,7 +134,9 @@ public class CategoryMapperImpl implements CategoryMapper {
 
         Category category = new Category();
 
-        category.setId( addCategoryRequest.getParentId() );
+        if ( addCategoryRequest.getParentId() != null ) {
+            category.setId( addCategoryRequest.getParentId() );
+        }
 
         return category;
     }
@@ -170,7 +156,9 @@ public class CategoryMapperImpl implements CategoryMapper {
 
         Category category = new Category();
 
-        category.setId( updateCategoryRequest.getParentId() );
+        if ( updateCategoryRequest.getParentId() != null ) {
+            category.setId( updateCategoryRequest.getParentId() );
+        }
 
         return category;
     }

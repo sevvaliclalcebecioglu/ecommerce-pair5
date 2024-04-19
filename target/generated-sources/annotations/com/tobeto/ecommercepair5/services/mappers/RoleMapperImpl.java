@@ -14,7 +14,7 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-04-08T23:53:36+0300",
+    date = "2024-04-12T15:04:32+0300",
     comments = "version: 1.6.0.Beta1, compiler: javac, environment: Java 20.0.2 (Oracle Corporation)"
 )
 public class RoleMapperImpl implements RoleMapper {
@@ -39,7 +39,9 @@ public class RoleMapperImpl implements RoleMapper {
         AddRoleResponse addRoleResponse = new AddRoleResponse();
 
         addRoleResponse.setId( role.getId() );
-        addRoleResponse.setName( role.getName() );
+        if ( role.getName() != null ) {
+            addRoleResponse.setName( role.getName().name() );
+        }
 
         return addRoleResponse;
     }
@@ -66,7 +68,9 @@ public class RoleMapperImpl implements RoleMapper {
         UpdateRoleResponse updateRoleResponse = new UpdateRoleResponse();
 
         updateRoleResponse.setId( role.getId() );
-        updateRoleResponse.setName( role.getName() );
+        if ( role.getName() != null ) {
+            updateRoleResponse.setName( role.getName().name() );
+        }
 
         return updateRoleResponse;
     }
@@ -80,7 +84,9 @@ public class RoleMapperImpl implements RoleMapper {
         DeleteRoleResponse deleteRoleResponse = new DeleteRoleResponse();
 
         deleteRoleResponse.setId( role.getId() );
-        deleteRoleResponse.setName( role.getName() );
+        if ( role.getName() != null ) {
+            deleteRoleResponse.setName( role.getName().name() );
+        }
 
         return deleteRoleResponse;
     }
@@ -108,7 +114,9 @@ public class RoleMapperImpl implements RoleMapper {
         GetRoleResponse getRoleResponse = new GetRoleResponse();
 
         getRoleResponse.setId( role.getId() );
-        getRoleResponse.setName( role.getName() );
+        if ( role.getName() != null ) {
+            getRoleResponse.setName( role.getName().name() );
+        }
 
         return getRoleResponse;
     }
@@ -121,7 +129,9 @@ public class RoleMapperImpl implements RoleMapper {
         ListRoleResponse listRoleResponse = new ListRoleResponse();
 
         listRoleResponse.setId( role.getId() );
-        listRoleResponse.setName( role.getName() );
+        if ( role.getName() != null ) {
+            listRoleResponse.setName( role.getName().name() );
+        }
 
         return listRoleResponse;
     }

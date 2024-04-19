@@ -3,6 +3,7 @@ package com.tobeto.ecommercepair5.services.dtos.requests.product;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,23 +16,22 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UpdateProductRequest {
-    @NotNull
+    @NotNull(message = "You must enter an id.")
     private int id;
+
+    @NotEmpty(message = "Product name cannot be empty.")
+    @Size(min = 2, max = 32, message = "Product name must be between 2-32 characters.")
+    private String name;
 
     private int categoryId;
 
-    @NotEmpty(message = "Aynı isimle iki ürün eklenemez")
-    private String name;
-
     private String description;
 
-    @PositiveOrZero(message = "Stok miktarı negatif olamaz")
-    private int stock;
-
-    @PositiveOrZero(message = "Birim fiyatı 0'dan düşük olamaz.")
+    @PositiveOrZero(message = "Stock quantity cannot be negative")
     private double unitPrice;
 
+    @PositiveOrZero(message = "Stock quantity cannot be negative")
+    private int stock;
+
     private LocalDate addedDate;
-
-
 }

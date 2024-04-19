@@ -29,7 +29,7 @@ public class CategoriesController {
     }
 
     @DeleteMapping
-    public DeleteCategoryResponse delete(@RequestParam @Valid int id) {
+    public DeleteCategoryResponse delete(@RequestParam @Valid Integer id) {
         return categoryService.delete(id);
     }
 
@@ -39,7 +39,7 @@ public class CategoriesController {
     }
 
     @GetMapping("/{getById}")
-    public GetCategoryResponse getById(@PathVariable int getById) {
+    public GetCategoryResponse getById(@PathVariable Integer getById) {
         return categoryService.getById(getById);
     }
 }

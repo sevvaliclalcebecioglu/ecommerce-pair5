@@ -16,7 +16,7 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-04-08T23:53:36+0300",
+    date = "2024-04-12T15:04:31+0300",
     comments = "version: 1.6.0.Beta1, compiler: javac, environment: Java 20.0.2 (Oracle Corporation)"
 )
 public class UserRoleMapperImpl implements UserRoleMapper {
@@ -47,7 +47,9 @@ public class UserRoleMapperImpl implements UserRoleMapper {
             addUserRoleResponse.setId( userRole.getId() );
         }
         if ( role != null ) {
-            addUserRoleResponse.setRoleName( role.getName() );
+            if ( role.getName() != null ) {
+                addUserRoleResponse.setRoleName( role.getName().name() );
+            }
         }
         if ( user != null ) {
             addUserRoleResponse.setUserName( user.getFirstName() );
@@ -83,7 +85,9 @@ public class UserRoleMapperImpl implements UserRoleMapper {
             updateUserRoleResponse.setId( userRole.getId() );
         }
         if ( role != null ) {
-            updateUserRoleResponse.setRoleName( role.getName() );
+            if ( role.getName() != null ) {
+                updateUserRoleResponse.setRoleName( role.getName().name() );
+            }
         }
         if ( user != null ) {
             updateUserRoleResponse.setUserName( user.getFirstName() );
@@ -131,7 +135,9 @@ public class UserRoleMapperImpl implements UserRoleMapper {
             getUserRoleResponse.setId( userRole.getId() );
         }
         if ( role != null ) {
-            getUserRoleResponse.setRoleName( role.getName() );
+            if ( role.getName() != null ) {
+                getUserRoleResponse.setRoleName( role.getName().name() );
+            }
         }
         if ( user != null ) {
             getUserRoleResponse.setUserName( user.getFirstName() );

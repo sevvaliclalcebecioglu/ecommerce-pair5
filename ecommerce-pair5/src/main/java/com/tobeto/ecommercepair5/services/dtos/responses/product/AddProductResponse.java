@@ -22,7 +22,7 @@ public class AddProductResponse {
 
     private int stock;
 
-    private int unitPrice;
+    private double unitPrice;
 
     private LocalDate addedDate;
 
